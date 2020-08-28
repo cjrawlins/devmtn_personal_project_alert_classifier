@@ -4,7 +4,7 @@ module.exports = {
     register: async (req, res) => {
         console.log("Register Called");
         const db = req.app.get('db');
-        let { username, password } = req.body;
+        let { username, password, userlevel, enabled } = req.body;
         const existingUser = await db.check_for_user([username]);
         if (existingUser[0]) {
             console.log("Register Failed Duplicate");
@@ -12,7 +12,7 @@ module.exports = {
         }
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password, salt);
-        const newUser = await db.register_user( [username, hash] );
+        const newUser = await db.register_user( [username, hash, userlevel, enabled] );
         req.session.user = {
             id: newUser[0].id,
             username: newUser[0].username,
@@ -50,6 +50,10 @@ module.exports = {
         console.log("Logout Called");
         req.session.destroy();
         res.status(200).send("Logout Successful");
+    },
+
+    updateUser: async (req, res) => {
+
     },
 
     getUser: (req, res) => {
