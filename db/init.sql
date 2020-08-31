@@ -3,6 +3,19 @@ CREATE TABLE users (
     username  VARCHAR(64) NOT NULL,
     pass_hash VARCHAR(64) NOT NULL,
     userlevel VARCHAR(64) NOT NULL,
+    enabled   BOOLEAN
+);
+
+CREATE TABLE sources (
+    source_id   SERIAL PRIMARY KEY,
+    enabled     BOOLEAN,
+    nx_cameraId VARCHAR(64),
+    name        VARCHAR(64) NOT NULL,
+    ip          INET NOT NULL,
+    site        VARCHAR(64),
+    make        VARCHAR(64),
+    model       VARCHAR(64),
+    notes       TEXT
 );
 
 CREATE TABLE events (
@@ -18,15 +31,9 @@ CREATE TABLE events (
     user_class     VARCHAR(64),
     user_cat       VARCHAR(64),
     user_notes     TEXT,
+    img_thumb      TEXT,
+    img_url        TEXT,
+    img            TEXT
 );
 
-CREATE TABLE sources (
-    source_id SERIAL PRIMARY KEY,
-    enabled   BOOLEAN,
-    name      VARCHAR(64) NOT NULL,
-    ip        INET NOT NULL,
-    site      VARCHAR(64),
-    make      VARCHAR(64),
-    model     VARCHAR(64),
-    notes     TEXT
-);
+

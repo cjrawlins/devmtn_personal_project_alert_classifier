@@ -1,5 +1,5 @@
 INSERT INTO users
-(username, password, userlevel, enabled)
+(username, pass_hash, userlevel, enabled)
 VALUES
 ($1, $2, $3, $4)
 RETURNING *;
