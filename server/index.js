@@ -54,6 +54,8 @@ app.post('/api/event', eventCtrl.createEvent); // adds new event. Comes from NX 
 
 app.get('/api/events/all', eventCtrl.getAllEvents);
 app.get('/api/events', eventCtrl.getEvents); // POST-MVP req.body has start/stop timestamp
+// VV Temp VV
+app.get('/api/getimage', eventCtrl.getImage);
 app.get('/api/event/:id', eventCtrl.getEvent); // gets single event req.params had event_id
 app.get('/api/event/?', eventCtrl.searchEvents); // req.query has search params
 

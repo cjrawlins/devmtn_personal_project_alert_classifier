@@ -7,21 +7,24 @@ CREATE TABLE users (
 );
 
 CREATE TABLE sources (
-    source_id   SERIAL PRIMARY KEY,
-    enabled     BOOLEAN,
-    nx_cameraId VARCHAR(64),
-    name        VARCHAR(64) NOT NULL,
-    ip          INET NOT NULL,
-    site        VARCHAR(64),
-    make        VARCHAR(64),
-    model       VARCHAR(64),
-    notes       TEXT
+    source_id    SERIAL PRIMARY KEY,
+    enabled      BOOLEAN,
+    nx_cameraId VARCHAR(64) NOT NULL,
+    name         VARCHAR(64) NOT NULL,
+    ip           INET NOT NULL,
+    site         VARCHAR(64),
+    make         VARCHAR(64),
+    model        VARCHAR(64),
+    gps          VARCHAR(64),
+    notes        TEXT
 );
 
 CREATE TABLE events (
     event_id       SERIAL PRIMARY KEY,
     source_id      INT REFERENCES sources(source_id),
-    timestamp      TIMESTAMP NOT NULL, 
+    event_cameraId VARCHAR(64),
+    timestamp      BIGINT NOT NULL,
+    date_time      VARCHAR(64) NOT NULL,
     status         VARCHAR(64) NOT NULL,
     analytics_type VARCHAR(64) NOT NULL,
     src_class      VARCHAR(64) NOT NULL,
@@ -31,9 +34,12 @@ CREATE TABLE events (
     user_class     VARCHAR(64),
     user_cat       VARCHAR(64),
     user_notes     TEXT,
-    img_thumb      TEXT,
     img_url        TEXT,
-    img            TEXT
+    img_data       TEXT,
+    vid_live_webm   TEXT,
+    vid_live_mpjpeg TEXT,
+    vid_rec_webm   TEXT,
+    vid_rec_mpjpeg TEXT
 );
 
 

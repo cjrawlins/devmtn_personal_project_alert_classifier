@@ -3,6 +3,7 @@ module.exports = {
         console.log("Add Source Called");
         const db = req.app.get('db');
         let { enabled,
+            nx_cameraid,
             name,
             ip,
             site,
@@ -12,6 +13,7 @@ module.exports = {
         } = req.body;
         await db.create_source( [
             enabled,
+            nx_cameraid,
             name,
             ip,
             site,

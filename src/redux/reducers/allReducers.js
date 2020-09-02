@@ -12,9 +12,9 @@ import settingsReducer from './settingsReducer';
 const allReducers = combineReducers( {
     counter: counterReducer,
     isLogged: loggedReducer,
-    user: userReducer,
-    events: eventsReducer,
-    settings: settingsReducer
+    reduxUser: userReducer,
+    reduxEvents: eventsReducer,
+    reduxSettings: settingsReducer
 } );
 
 export default allReducers;
