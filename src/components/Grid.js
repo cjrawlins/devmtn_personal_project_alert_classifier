@@ -9,12 +9,12 @@ import EventCard from './EventCard';
 import axios from 'axios';
 import GridCard from './GridCard';
 
-function Dashboard() {
+function Grid() {
 
     const dispatch = useDispatch();
 
+    const reduxState = store.getState();
 
-    
     let [allEvents, setAllEvents] = useState([]);
 
     // let allEvents = [{
@@ -69,9 +69,9 @@ function Dashboard() {
 
 
     
-    let eventsMap = allEvents.map( function(curr, index) {
+    let gridMap = allEvents.map( function(curr, index) {
         return(
-            <EventCard
+            <GridCard
                 key = {index}
                 eventInfo = {curr}
             />
@@ -82,13 +82,13 @@ function Dashboard() {
     console.log("reduxState: ", reduxState);
     return(
 
-        <div className="Dashboard">
+        <div className="Grid">
             <Nav/>
             {/* <EventCard/> */}
-            {eventsMap}
+            {/* {gridMap} */}
         </div>
     );
 
 }
 
-export default Dashboard;
+export default Grid;

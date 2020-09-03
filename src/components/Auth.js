@@ -19,7 +19,7 @@ function Auth(props) {
             } )
             .then( res => {
                 dispatch( login_user( res.data ) );
-                props.history.push('/dashboard');
+                props.history.push('/events');
             } )
             .catch( error => {
                 console.log(error);
