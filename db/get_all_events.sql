@@ -3,7 +3,8 @@ SELECT  e.event_id,
         e.event_cameraid,
         s.name,
         s.site, 
-        e.timestamp, 
+        e.timestamp,
+        e.date_time, 
         e.status, 
         e.analytics_type, 
         e.src_class, 
@@ -14,7 +15,10 @@ SELECT  e.event_id,
         e.user_cat,
         e.user_notes,
         e.img_url,
-        e.img_data
+        e.vid_live_webm,
+        e.vid_live_mpjpeg,
+        e.vid_rec_webm,
+        e.vid_rec_mpjpeg
 FROM events e
 JOIN sources s 
 ON e.source_id = s.source_id

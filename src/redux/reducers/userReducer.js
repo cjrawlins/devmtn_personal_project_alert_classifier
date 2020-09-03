@@ -1,7 +1,6 @@
 const initialState = {};
 
 const userReducer = ( state = initialState, action ) => {
-    console.log("User Reducer Action Type: ", action.type);
     switch(action.type) {
         case "LOGIN_USER": 
             return { ...state, ...action.payload}

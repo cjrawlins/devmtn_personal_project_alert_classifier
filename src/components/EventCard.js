@@ -40,8 +40,15 @@ function EventCard(props) {
     }
 
     const handleChangeEventUp = () => {
+        if (displayEventId === 0) {
+            getAllEvents();
+            setDisplayEventId(0);
+            console.log("Trying to force update")
+
+        } else {
         setDisplayEventId(displayEventId - 1);
         setDisplayEvent(allEvents[displayEventId]);
+        }
     }
 
     const handleChangeEventDown = () => {
@@ -51,115 +58,89 @@ function EventCard(props) {
 
     return(
         <div className="EventCard">
-            { displayEventId === 0 ? <div className="eventcard-arrows"></div> : 
+            {/* { displayEventId === 0 ? <div className="eventcard-arrows"></div> :  */}
             <img className="eventcard-arrows" src="./media/triangle-up.png"  
                 onClick={ () => handleChangeEventUp() } 
-            /> }
+            /> 
             <div className="eventcard-main">
                 <div className="eventcard-image-container">
                     <img className="eventcard-image" src={displayEvent.img_url} alt="#"/>
                 </div>
                 <div className="eventcard-data-container">
-                    <div className="eventcard-label-container">
-                        <h3 className="eventcard-label">Status:</h3>
-                        <h3 className="eventcard-label">{`Event ID: ${displayEvent.event_id}`}</h3>
-                    </div>
-                    <div className="eventcard-info-container">
-                        <h1>NEW</h1>
-                    </div>
-                    <div className="eventcard-label-container">
-                        <h3 className="eventcard-label">Source:</h3>
-                    </div>
-                    <div className="eventcard-info-container">
-                        <h1>NW Building</h1>
-                        <button className="button eventcard-button" 
-                            // onClick={ () => setEventImage("")}
-                        >Source Info</button>
-                    </div>
-                    <div className="eventcard-label-container">
-                    <h3 className="eventcard-label">Object Classification:</h3>
-                    </div>
-                    <div className="eventcard-input-container">
-                        <div className="eventcard-icon-container">
-                            <img className={selectedClass.person ? "eventcard-icon-image-selected" : "eventcard-icon-image"}
-                                onClick={ () => setSelectedClass( {
-                                    ...selectedClass, 
-                                    person:  true,
-                                    vehicle: false,
-                                    tree:    false
-                                } ) } 
-                                src="./media/directions_walk-white-48dp.svg" alt="#"/>
-                            <p className="eventcard-icon-label">person</p>
+                    <div className="eventcard-source-container">
+                        <div className="eventcard-source-info-container">
+                            <h3 className="eventcard-label">Status:</h3>
+                            <h3 className="eventcard-eventData">{displayEvent.status}</h3>
+                            <h3 className="eventcard-label">Date / Time:</h3>
+                            <h3 className="eventcard-eventData">{displayEvent.date_time}</h3>
+                            <h3 className="eventcard-label">Camera Name:</h3>
+                            <h3 className="eventcard-eventData">{displayEvent.name}</h3>
+                            <h3 className="eventcard-label">Site / Location:</h3>
+                            <h3 className="eventcard-eventData">{displayEvent.site}</h3>
+                            <h3 className="eventcard-label">Analytics Type:</h3>
+                            <h3 className="eventcard-eventData">{displayEvent.analytics_type}</h3>
+                            <h3 className="eventcard-label">Classified As:</h3>
+                            <h3 className="eventcard-eventData">{displayEvent.src_class}</h3>                        
                         </div>
-                        <div className="eventcard-icon-container">
-                            <img className={selectedClass.vehicle ? "eventcard-icon-image-selected" : "eventcard-icon-image"}
-                                onClick={ () => setSelectedClass( {
-                                    ...selectedClass, 
-                                    person:  false,
-                                    vehicle: true,
-                                    tree:    false
-                                } ) } 
-                                src="./media/directions_car-white-48dp.svg" alt="#"/>
-                            <p className="eventcard-icon-label">vehicle</p>
+                        <div className="eventcard-source-right-container">
+                            <div className="eventcard-eventId-container">
+                                <h3 className="eventcard-label">ID:</h3>
+                                <h3 className="eventcard-eventData">{displayEvent.event_id}</h3> 
+                            </div>
+                            <button className="button eventcard-button">Source Info:</button>
+                            <button className="button eventcard-button">View Live</button>                           
                         </div>
-                        <div className="eventcard-icon-container">
-                            <img className={selectedClass.tree ? "eventcard-icon-image-selected" : "eventcard-icon-image"}
-                                onClick={ () => setSelectedClass( {
-                                    ...selectedClass, 
-                                    person:  false,
-                                    vehicle: false,
-                                    tree:    true
-                                } ) } 
-                                src="./media/nature-white-48dp.svg" alt="#"/>
-                            <p className="eventcard-icon-label">tree</p>
-                        </div>
-                        
                     </div>
-                    <div className="eventcard-label-container">
-                    <h3 className="eventcard-label">Alarm Category:</h3>
-                    </div>
-                    <div className="eventcard-input-container">
+                    <div className="eventcard-userInput-container">
+                        <div className="eventcard-userInput-info-container">
+                            <h3 className="eventcard-label">Object Classification:</h3>
+                            <div className="eventcard-userInput-selectIcon">
+                                    <div className="eventcard-icon-container">
+                                        <img className={selectedClass.person ? "eventcard-icon-image-selected" : "eventcard-icon-image"}
+                                            onClick={ () => setSelectedClass( {
+                                                ...selectedClass, 
+                                                person:  true,
+                                                vehicle: false,
+                                                tree:    false
+                                            } ) } 
+                                            src="./media/directions_walk-white-48dp.svg" alt="#"/>
+                                        <p className="eventcard-icon-label">person</p>
+                                    </div>
+                                    <div className="eventcard-icon-container">
+                                        <img className={selectedClass.vehicle ? "eventcard-icon-image-selected" : "eventcard-icon-image"}
+                                            onClick={ () => setSelectedClass( {
+                                                ...selectedClass, 
+                                                person:  false,
+                                                vehicle: true,
+                                                tree:    false
+                                            } ) } 
+                                            src="./media/directions_car-white-48dp.svg" alt="#"/>
+                                        <p className="eventcard-icon-label">vehicle</p>
+                                    </div>
+                                    <div className="eventcard-icon-container">
+                                        <img className={selectedClass.tree ? "eventcard-icon-image-selected" : "eventcard-icon-image"}
+                                            onClick={ () => setSelectedClass( {
+                                                ...selectedClass, 
+                                                person:  false,
+                                                vehicle: false,
+                                                tree:    true
+                                            } ) } 
+                                            src="./media/nature-white-48dp.svg" alt="#"/>
+                                        <p className="eventcard-icon-label">tree</p>
+                                    </div>
+                                    <button className="button eventcard-button">Other</button>
+                            </div>
+                                    
 
-                    <div className="eventcard-icon-container">
-                            <img className={selectedCat.alarm ? "eventcard-icon-image-selected" : "eventcard-icon-image"}
-                                onClick={ () => setSelectedCat( {
-                                    ...selectedCat, 
-                                    alarm:  true,
-                                    nuisance: false,
-                                    false:    false
-                                } ) } 
-                                src="./media/notifications_active-white-48dp.svg" alt="#"/>
-                            <p className="eventcard-icon-label">alarm</p>
+                        </div> 
+                        <div className="eventcard-userInput-selectIcon">
+
                         </div>
-                        <div className="eventcard-icon-container">
-                            <img className={selectedCat.nuisance ? "eventcard-icon-image-selected" : "eventcard-icon-image"}
-                                onClick={ () => setSelectedCat( {
-                                    ...selectedCat, 
-                                    alarm:  false,
-                                    nuisance: true,
-                                    false:    false
-                                } ) } 
-                                src="./media/notifications_none-white-48dp.svg" alt="#"/>
-                            <p className="eventcard-icon-label">nuisance</p>
-                        </div>
-                        <div className="eventcard-icon-container">
-                            <img className={selectedCat.false ? "eventcard-icon-image-selected" : "eventcard-icon-image"}
-                                onClick={ () => setSelectedCat( {
-                                    ...selectedCat, 
-                                    alarm:  false,
-                                    nuisance: false,
-                                    false:    true
-                                } ) } 
-                                src="./media/notifications_off-white-48dp.svg" alt="#"/>
-                            <p className="eventcard-icon-label">false</p>
+
+                        <div className="eventcard-userInput-button-container">
+                            
                         </div>
                     </div>
-
-                    <div className="eventcard-bottom-container">
-                            <button className="button eventcard-button">Add Note</button>
-                            <label><input type="checkbox" id="partBlocked" name="partBlocked"/>{" Partially Blocked"}</label>
-                    </div>
-
                 </div>
             </div>
             { displayEventId === allEvents.length ? <div className="eventcard-arrows"></div> : 
