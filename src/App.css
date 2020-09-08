@@ -200,7 +200,7 @@
 .eventcard-userInput-container {
   border: 1px solid white;
   background-color: #3a3a3a;
-  height: 50%;
+  height: 55%;
   width: 98%;
   margin: 1%;
   /* For Children */
@@ -220,12 +220,10 @@
   width: 100%;
 }
 
-.eventcard-label {
-  /* border: 1px solid white; */
+.eventcard-source-label {
   width: 35%;
   text-align: right;
   padding-right: 10px;
-  /* margin: 20px; */
 }
 
 .eventcard-eventData {
@@ -237,18 +235,25 @@
 .eventcard-button {
   height: 20px;
   width: 70px;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   font-size: 0.5em;
 }
 
 .eventcard-userInput-selectIcon {
   height: 40%;
-  background-color: red;
   /* For Children */
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly; 
   align-items: center;
+}
+
+.eventcard-userInput-label {
+  width: 100%;
+  font-size: 0.7em;
+  text-align: left;
+  border-top: 1px solid gray;
+  padding-left: 10px;
 }
 
 .eventcard-icon-container {
@@ -279,17 +284,10 @@
 }
 
 .eventcard-userInput-button-container {
-
-}
-
-/* ----------Grid---------- */
-.Grid {
-  background-color: black;
-  height: 100%;
-  width: 100vw;
-  padding: 0px 20px 0px 20px;
   /* For Children */
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
 }
+
+

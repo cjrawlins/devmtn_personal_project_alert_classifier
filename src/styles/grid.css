@@ -1,0 +1,81 @@
+/* ----------SASS Variables---------- */
+/* ----------SASS Mixin 'Functions'---------- */
+/* ----------Grid---------- */
+.Grid {
+  background-color: black;
+  height: 100%;
+  width: 100vw;
+  padding: 20px;
+  /* For Children */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+/* ----------GridCard---------- */
+.GridCard {
+  border: 1px solid white;
+  background-color: #1e1e1e;
+  height: 200px;
+  width: 400px;
+  margin: 10px;
+  color: white;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+}
+
+.gridcard-image-container {
+  border: 1px solid white;
+}
+
+.gridcard-image-container p {
+  font-size: 12px;
+}
+
+.gridcard-image-container img {
+  max-height: 99%;
+  max-width: 99%;
+}
+
+.gridcard-info-container {
+  border: 1px solid white;
+  padding: 8px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 2fr 3fr 3fr;
+      grid-template-rows: 1fr 2fr 3fr 3fr;
+}
+
+.gridcard-info-container h1 {
+  font-size: 28px;
+}
+
+.gridcard-info-container p {
+  font-size: 14px;
+}
+
+.gridcard-info-row1 {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 10fr 1fr;
+      grid-template-columns: 10fr 1fr;
+}
+
+.gridcard-info-row4 {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+/*# sourceMappingURL=grid.css.map */

@@ -1,0 +1,83 @@
+/* ----------SASS Variables---------- */
+$card_background: #1e1e1e;
+$text_color: white;
+
+/* ----------SASS Mixin 'Functions'---------- */
+@mixin grid-row-2($fr1, $fr2) {
+    display: grid;
+    grid-template-rows: $fr1, $fr2;
+}
+
+@mixin grid-column-2($fr1, $fr2) {
+    display: grid;
+    grid-template-columns: $fr1, $fr2;
+    background-color: blueviolet;
+}
+
+
+/* ----------Grid---------- */
+.Grid {
+    background-color: black;
+    height: 100%;
+    width: 100vw;
+    padding: 20px;
+    /* For Children */
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  
+  }
+
+/* ----------GridCard---------- */
+
+.GridCard {
+    border: 1px solid white;
+    background-color: $card_background;
+    height: 200px;
+    width: 400px;
+    margin: 10px;
+    //* For Children *//
+    color: $text_color;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+}
+
+.gridcard-image-container {
+    border: 1px solid white;
+    p {
+        font-size: 12px;
+    }
+    img {
+        max-height: 99%;
+        max-width: 99%;
+    }
+}
+
+.gridcard-info-container {
+    border: 1px solid white;
+    padding: 8px;
+    //* For Children *//
+    display: grid;
+    grid-template-rows: 1fr 2fr 3fr 3fr;
+    h1 {
+        font-size: 28px;
+    }
+    p {
+        font-size: 14px
+    }
+}
+
+.gridcard-info-row1 {
+    //@include grid-column-2( 5fr, 1fr );
+    display: grid;
+    grid-template-columns: 10fr 1fr;
+}
+
+.gridcard-info-row4 {
+    //@include grid-column-2( 1fr, 1fr );
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-content: center;
+}

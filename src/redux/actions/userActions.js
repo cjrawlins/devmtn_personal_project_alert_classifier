@@ -11,8 +11,9 @@ export const logout_user = () =>  {
     };
 };
 
-export const get_user = () => {
+export const get_user = (user) => {
     return {
-        type: 'GET_USER'
+        type: 'GET_USER',
+        payload: user
     };
 };

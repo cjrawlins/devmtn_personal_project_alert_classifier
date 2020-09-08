@@ -18,7 +18,6 @@ function Nav(props) {
             .catch( error => {
                 console.log(error);
             } )
-
     }
 
     return(
@@ -27,9 +26,11 @@ function Nav(props) {
                 <button className="nav-filter-menu-button">Filter</button>
             </div>
             <div className="nav-right-container">
-                <img className="nav-icons" src="./media/grid9-grey-8c8c8c.png" alt="logout" 
+                <Link to="/grid">
+                    <img className="nav-icons" src="./media/grid9-grey-8c8c8c.png" alt="logout" 
                 
-                />
+                    />
+                </Link>
                 <Link to="/">
                     <img className="nav-icons" src="./media/logout-grey-8c8c8c.png" alt="logout" 
                         onClick={ () => handleLogout() }

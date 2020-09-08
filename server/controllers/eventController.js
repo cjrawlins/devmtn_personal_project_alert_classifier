@@ -96,7 +96,18 @@ module.exports = {
     },
 
     deleteEvent: async (req, res) => {
-        
+        console.log("Delete Event Called");
+        const db = req.app.get('db');
+        const id = +req.params.id;
+        await db.delete_event( [id] )
+            .then( events => {
+                res.status(200).send( events )
+                //console.log("Sending: ", posts);
+            } )
+            .catch(err => {
+                res.status(500).send({ errorMessage: `Error Deleting Event ID: ${id}`});
+                console.log(err)
+        });
     },
 
     getImage: async (req, res) => {
