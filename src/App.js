@@ -1,5 +1,6 @@
 import React from 'react';
-import store from './redux/store';
+import { withRouter } from 'react-router-dom'; 
+
 
 //Components
 import Nav from './components/Nav';
@@ -7,20 +8,19 @@ import routes from './routes';
 
 // CSS
 import './reset.css';
-import './App.css';
+import './styles/App.css';
+import './styles/eventcard.css';
 import './styles/grid.css';
+import './styles/settings.css';
 
-
-function App() {
-
-  const reduxState = store.getState();
+function App(props) {
 
   return (
     <div className="App">
-      { reduxState.reduxUser.enabled ? <Nav/> : null }
+      { props.history.location.pathname !== '/' ? <Nav/> : null }
       {routes}
     </div>
   );
 }
 
-export default App;
+export default withRouter(App);

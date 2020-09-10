@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { logout_user } from '../redux/actions/userActions'
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom'; 
+
 
 function Nav(props) {
 
@@ -26,13 +28,20 @@ function Nav(props) {
                 <button className="nav-filter-menu-button">Filter</button>
             </div>
             <div className="nav-right-container">
+                { props.history.location.pathname === '/events' ?
                 <Link to="/grid">
-                    <img className="nav-icons" src="./media/grid9-grey-8c8c8c.png" alt="logout" 
-                
-                    />
+                    <img className="nav-icons" src="./media/grid.png" alt="grid-icon" />
+                </Link> 
+                :
+                <Link to="/events">
+                    <img className="nav-icons" src="./media/eventcard.png" alt="eventcard-icon" />
+                </Link> 
+                }
+                <Link to="/settings">
+                    <img className="nav-icons" src="./media/settings.png" alt="settings-logo" />
                 </Link>
                 <Link to="/">
-                    <img className="nav-icons" src="./media/logout-grey-8c8c8c.png" alt="logout" 
+                    <img className="nav-icons" src="./media/logout.png" alt="logout" 
                         onClick={ () => handleLogout() }
                     />
                 </Link>
@@ -41,4 +50,4 @@ function Nav(props) {
     );
 }
 
-export default Nav;
+export default withRouter(Nav);

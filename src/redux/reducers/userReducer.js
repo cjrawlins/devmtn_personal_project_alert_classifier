@@ -7,8 +7,6 @@ const userReducer = ( state = initialState, action ) => {
             return { ...state, ...action.payload}
         case "LOGOUT_USER": 
             return { ...state, ...action.payload }
-        case "LOGOUT_USER": 
-            return initialState
         case "GET_USER_PENDING":
             return state
         case "GET_USER_FULFILLED":

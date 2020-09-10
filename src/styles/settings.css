@@ -1,0 +1,40 @@
+/* ----------SASS Variables---------- */
+/*----------Settings----------*/
+.Settings {
+  background-color: black;
+  width: 100vw;
+  padding: 20px;
+  /* For Children */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.settings-main-container {
+  border: 1px solid white;
+  height: 90%;
+  width: 90%;
+  min-height: 300px;
+  min-width: 500px;
+}
+
+.settings-tabs-container {
+  height: 25px;
+  width: 100%;
+  /* For Children */
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr 5fr;
+      grid-template-columns: 1fr 1fr 1fr 5fr;
+}
+
+.settings-tabs-container .settings-tabs {
+  border: 1px solid white;
+}
+/*# sourceMappingURL=settings.css.map */

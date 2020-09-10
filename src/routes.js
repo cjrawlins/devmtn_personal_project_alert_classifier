@@ -3,6 +3,7 @@ import {Switch, Route} from 'react-router-dom';
 
 //Components
 import Auth from './components/Auth';
+import Nav from './components/Nav';
 import EventCard from './components/EventCard';
 import Grid from './components/Grid';
 import Settings from './components/Settings';

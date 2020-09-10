@@ -1,14 +1,9 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-
 import axios from 'axios';
-
 
 function GridCard(props) {
 
    let eventData = props.eventInfo;
-   const dispatch = useDispatch();    
-
 
     const deleteCard = () => {
         console.log(`Deleting Card ${eventData.event_id}`)
@@ -24,7 +19,7 @@ function GridCard(props) {
         <div className="GridCard">
             <div className="gridcard-image-container">
                 <p>{eventData.date_time}</p>
-                <img src={eventData.img_url} alt="event img"/>
+                <img src={eventData.rec_img_url} alt="event img"/>
             </div>
             <div className="gridcard-info-container">
                 <div className="gridcard-info-row1">

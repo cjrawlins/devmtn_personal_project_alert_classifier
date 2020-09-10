@@ -1,24 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { get_all_events } from '../redux/actions/eventsActions';
 import { get_user } from '../redux/actions/userActions';
+import store from '../redux/store';
 import axios from 'axios';
 
 function EventCard() {
 
-    const dispatch = useDispatch();    
-
+    const dispatch = useDispatch();   
+    const reduxState = store.getState();
+    const userInfo = {...reduxState.reduxUser};
+ 
+    // State Hooks for Events
+    const [allEvents, setAllEvents] = useState([]);
     const [displayEventId, setDisplayEventId] = useState(0);
     const [displayEvent, setDisplayEvent] = useState({});
 
+    // State Hooks for User Input
     const [selectedClass, setSelectedClass] = useState( { person:  false, vehicle: false, tree: false } );
     const [selectedCat, setSelectedCat] = useState( { alarm:  false, nuisance: false, false: false } );
+    const [userNotes, setUserNotes] = useState( "No Notes" );
 
-    let [allEvents, setAllEvents] = useState([]);
+    // Interface State Hooks
+    const [liveToggle, setLiveToggle] = useState(false);
+
     
     useEffect( () => {
         getAllEvents();
-        getUserSession();
+        //getUserSession();
     }, [])
     
     const getAllEvents = () => {
@@ -29,6 +38,7 @@ function EventCard() {
                 dispatch( get_all_events( res.data ) )
                 setAllEvents(res.data);
                 setDisplayEvent(res.data[0])
+                console.log(res.data);
             } );
     }
 
@@ -60,25 +70,54 @@ function EventCard() {
         setDisplayEvent(allEvents[displayEventId]);
     }
 
+    const handleSave = (andNext) => {
+        console.log('Saving User Input');
+        const userClass = 'Person';
+        const userCat = 'Alarm';
+        axios
+            .put(`/api/event/${displayEvent.event_id}`, 
+                [ displayEvent.event_id,
+                     userInfo.user_id, 
+                     userClass, 
+                     userCat, 
+                     userNotes ] )
+            .catch( err => console.log( 'Error Editing Event: ', err ) );
+        if (andNext) { handleChangeEventDown() }
+    }
+
+    // const goToEvent = (id) => {
+    //     const indexOfEvent = allEvents.findIndex( e => e.event_id === id )
+    //     console.log("goToEvent found Index: ", indexOfEvent);
+    // }
+
     return(
         <div className="EventCard">
-            {/* { displayEventId === 0 ? <div className="eventcard-arrows"></div> :  */}
-            <img className="eventcard-arrows" src="./media/triangle-up.png"  
+            <img className="eventcard-arrows" src="./media/triangle-up.png" alt="up arrow"
                 onClick={ () => handleChangeEventUp() } 
             /> 
             <div className="eventcard-main">
                 <div className="eventcard-image-container">
-                    <img className="eventcard-image" src={displayEvent.img_url} alt="#"/>
+                    <div className="eventcard-image-timestamp-container">
+                        <h3 className="eventcard-image-timestamp">{displayEvent.date_time}</h3>        
+                    </div>
+                    <img className="eventcard-image" 
+                        src={ liveToggle ? displayEvent.live_img_url : displayEvent.rec_img_url} alt="#"/>
+                    <div className="eventcard-image-button-container">
+                        <button 
+                            className={ liveToggle ? "eventcard-button" : "eventcard-button button-selected"}
+                            onClick={() => setLiveToggle(false) }
+                            >Event Image</button>
+                        <button 
+                            className={ liveToggle ? "eventcard-button button-selected" : "eventcard-button"}
+                            onClick={() => setLiveToggle(true) }
+                            >Live Image</button>
+                    </div>
                 </div>
                 <div className="eventcard-data-container">
-
-
                     <div className="eventcard-source-container">
                         <div className="eventcard-source-info-container">
                             <h3 className="eventcard-source-label">Status:</h3>
                             <h3 className="eventcard-eventData">{displayEvent.status}</h3>
-                            <h3 className="eventcard-source-label">Date / Time:</h3>
-                            <h3 className="eventcard-eventData">{displayEvent.date_time}</h3>
                             <h3 className="eventcard-source-label">Camera Name:</h3>
                             <h3 className="eventcard-eventData">{displayEvent.name}</h3>
                             <h3 className="eventcard-source-label">Site / Location:</h3>
@@ -93,8 +132,10 @@ function EventCard() {
                                 <h3 className="eventcard-label">ID:</h3>
                                 <h3 className="eventcard-eventData">{displayEvent.event_id}</h3> 
                             </div>
-                            <button className="button eventcard-button">Source Info:</button>
-                            <button className="button eventcard-button">View Live</button>                           
+                            <button className="button eventcard-button" onClick={ () => window.open(displayEvent.vid_live_webm)} >Live .webm</button>                           
+                            <button className="button eventcard-button" onClick={ () => window.open(displayEvent.vid_live_mpjpeg)} >Live .mpjpeg</button>                           
+                            <button className="button eventcard-button" onClick={ () => window.open(displayEvent.vid_rec_webm)} >Rec .webm</button>                           
+                            <button className="button eventcard-button" onClick={ () => window.open(displayEvent.vid_rec_mpjpeg)} >Rec .mpjpeg</button>                           
                         </div>
                     </div>
 
@@ -134,7 +175,7 @@ function EventCard() {
                                             tree:    true
                                         } ) } 
                                         src="./media/nature-white-48dp.svg" alt="#"/>
-                                    <p className="eventcard-icon-label">tree</p>
+                                    <p className="eventcard-icon-label">tree/plant</p>
                                 </div>
                                 <button className="button eventcard-button">Other</button>
                             </div>
@@ -178,14 +219,14 @@ function EventCard() {
                             </div>
                         </div> 
                         <div className="eventcard-userInput-button-container">
-                            <button className="button eventcard-button">Save</button> 
-                            <button className="button eventcard-button">Save & Next</button> 
+                            <button className="button eventcard-button" onClick={ () => handleSave(false) } >Save</button> 
+                            <button className="button eventcard-button" onClick={ () => handleSave(true) } >Save & Next</button> 
                         </div>
                     </div>
                 </div>
             </div>
             { displayEventId === allEvents.length ? <div className="eventcard-arrows"></div> : 
-            <img className="eventcard-arrows" src="./media/triangle-down.png"  
+            <img className="eventcard-arrows" src="./media/triangle-down.png" alt="down arrow"
                 onClick={ () => handleChangeEventDown() } 
             /> }
         </div>
