@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { get_all_events } from '../redux/actions/eventsActions';
-import { get_user } from '../redux/actions/userActions';
 import axios from 'axios';
 
 //Components
@@ -16,7 +15,6 @@ function Grid() {
 
     useEffect( () => {
         getAllEvents();
-        getUserSession();
     }, [])
     
     const getAllEvents = () => {
@@ -29,15 +27,6 @@ function Grid() {
             } )     
     }
 
-    const getUserSession = () => {
-        console.log("---Updating User Session")
-        axios
-            .get('/auth/getuser')
-            .then( res => {
-                console.log("Grid Update User", res.data)
-                dispatch( get_user() )
-            } )   
-    }
     
     let gridMap = allEvents.map( function(curr, index) {
         return(

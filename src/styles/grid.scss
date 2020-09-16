@@ -1,6 +1,7 @@
 /* ----------SASS Variables---------- */
 $card_background: #1e1e1e;
 $text_color: white;
+$border: 1px solid white;
 
 /* ----------SASS Mixin 'Functions'---------- */
 @mixin grid-row-2($fr1, $fr2) {
@@ -19,7 +20,9 @@ $text_color: white;
 .Grid {
     background-color: black;
     width: 100vw;
+    height: auto;;
     padding: 20px;
+    margin-top: 30px;
     /* For Children */
     display: flex;
     flex-wrap: wrap;
@@ -73,10 +76,18 @@ $text_color: white;
     grid-template-columns: 10fr 1fr;
 }
 
-.gridcard-info-row4 {
+.gridcard-info-icons {
     //@include grid-column-2( 1fr, 1fr );
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 3fr 1fr;
     justify-items: center;
     align-content: center;
+    // div {
+    //     //border: $border;
+    // }
+    img {
+        height: 40px;
+        width: 40px;
+    }
+    
 }

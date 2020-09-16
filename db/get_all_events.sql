@@ -5,7 +5,7 @@ SELECT  e.event_id,
         s.site,
         s.ip, 
         e.timestamp,
-        e.date_time, 
+        e.epoch_time, 
         e.status, 
         e.analytics_type, 
         e.src_class, 
@@ -26,4 +26,5 @@ FROM events e
 JOIN sources s 
 ON e.source_id = s.source_id
 LEFT JOIN users u 
-ON e.user_id = u.user_id;
+ON e.user_id = u.user_id
+ORDER BY epoch_time DESC;

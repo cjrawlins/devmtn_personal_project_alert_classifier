@@ -4,13 +4,20 @@ const express = require('express');
 const session = require('express-session');
 const massive = require('massive');
 
+const app = express();
+
+//socket.io dependencies
+// const server = require('https').createServer(app);
+// const options = { /* ... */ };
+// const io = require('socket.io')(server)
+
 // Controllers
 const authCtrl = require('./controllers/authController')
 const eventCtrl = require('./controllers/eventController')
 const settingsCtrl = require('./controllers/settingsController')
 
 // Create instance app from express
-const app = express();
+// const app = express();
 
 // Get Database connection info from .env
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
@@ -68,9 +75,8 @@ app.post('/api/settings/source', settingsCtrl.addSource); // Add Source Camera
 // app.get('/api/settings', settingsCtrl.getSettings); // Get full list of settings (includes subscribe cameras)
 // app.put('/api/settings/', settingsCtrl.setSetting); // Record settings in database, setting in req.body
 
-
-
 //Set up server to listen on port and log
 app.listen(SERVER_PORT, () => {
     console.log(`Server listening on port ${SERVER_PORT}.`);
-    });
+});
+

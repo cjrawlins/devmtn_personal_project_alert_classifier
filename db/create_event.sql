@@ -2,7 +2,7 @@ INSERT INTO events
 (   source_id,
     event_cameraid,
     timestamp,
-    date_time, 
+    epoch_time,
     status, 
     analytics_type, 
     src_class,

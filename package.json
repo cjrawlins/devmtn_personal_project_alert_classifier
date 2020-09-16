@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "main": "./server/",
-  "proxy": "http://localhost:4000",
+  "proxy": "http://192.168.100.100:4000",
   "nodemonConfig": {
     "ignore": [
       "src/*"
@@ -25,7 +25,9 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "redux": "^4.0.5",
-    "redux-promise-middleware": "^6.1.2"
+    "redux-promise-middleware": "^6.1.2",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,13 +1,35 @@
 // SASS Variables
+$page-background: black;
+$page-event-flash: red;
+$page-cycle-flash: rgb(130, 130, 130);
 $card_background: #1e1e1e;
+$shadow-color: #4b4b4b;
 $border: 1px solid white;
+$hover-color: grey;
+$selected-color: red;
+
+$breakpoint-width-wide: 1200px;
+$breakpoint-width-mid: 1000px;
+$breakpoint-width-narrow: 700px;
+$breakpoint-width-tiny: 500px;
+
+$breakpoint-font-large-wide: 1.5rem;
+$breakpoint-font-medium-wide: 1rem;
+$breakpoint-font-small-wide: 0.9rem;
+$breakpoint-font-large-wide: 1.0rem;
+$breakpoint-font-medium-mid: 0.8rem;
+$breakpoint-font-small-mid: 0.6rem;
+$breakpoint-font-large-narrow: 0.8rem;
+$breakpoint-font-medium-narrow: 0.7rem;
+$breakpoint-font-small-narrow: 0.5em;
 
 /* ----------Event Card---------- */
 .EventCard {
     height: calc(100% - 50px);
     width: 100%;
     min-height: 650px;
-    background-color: black;
+    min-width: 400px;
+    background-color: $page-background;
     padding: 0px 20px 0px 20px;
     /* For Children */
     display: flex;
@@ -15,27 +37,36 @@ $border: 1px solid white;
     align-items: center;
   /* justify-content: center;   */
   }
+
   
   .eventcard-arrows {
     height: 25px;
     width: 25px;
-    margin: 0;
+    margin: 10px;
   }
   
   .eventcard-main {
     height: 80%;
-    width: 100vw;
+    width: 90vw;
     max-width: 1200px;
-    min-height: 550px;
-    background-color: $card_background
-;
-    box-shadow: 0px 0px 30px 5px #3a3a3a;
+    min-width: 400px;
+    height: 550px;
+    background-color: $card_background;
+    box-shadow: 0px 0px 30px 5px $shadow-color;
     border: $border;
     border-radius: 1%;
-    margin: 30px;
+    margin: 20px;
     color: white;
     /* For Children */
     display: flex;
+  }
+
+  .ec-flash-event {
+    box-shadow: 0px 0px 30px 15px $page-event-flash;
+  }
+  
+  .ec-flash-cycle {
+    box-shadow: 0px 0px 30px 15px $page-cycle-flash;
   }
   
   .eventcard-image-container {
@@ -45,20 +76,21 @@ $border: 1px solid white;
     /* For Children */
     display: grid;
     grid-template-rows: 40px auto 25px;
+    align-items: center;
   }
   
   .eventcard-image-timestamp-container {
     border: $border;
     margin: 0px;
     .eventcard-image-timestamp {
-        font-size: 1.5rem;
+        font-size: $breakpoint-font-large-wide;
         margin: 10px;
     }
   }
 
   .eventcard-image {
     border: $border;
-    margin: 0px;
+    margin: 0 auto;
     max-height: 100%;
     max-width: 100%;
   }
@@ -69,7 +101,7 @@ $border: 1px solid white;
     .eventcard-button {
         height: 100%;
         width: 50%;
-        font-size: 1rem;
+        font-size: $breakpoint-font-medium-wide;
     }
     .button-selected {
         background-color: $card_background;
@@ -84,7 +116,7 @@ $border: 1px solid white;
     /* For Children */
     color: white;
     font-weight: 600;
-    font-size: 1.2rem;
+    font-size: $breakpoint-font-medium-wide;
     text-shadow: 1px 1px 5px black;
     display: flex;
     flex-direction: column;
@@ -121,6 +153,7 @@ $border: 1px solid white;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
   }
   
   .eventcard-eventId-container {
@@ -170,6 +203,7 @@ $border: 1px solid white;
     width: 90px;
     /* margin: 0 auto; */
     font-size: 0.5em;
+    font-weight: 600;
   }
   
   .eventcard-userInput-selectIcon {
@@ -183,7 +217,7 @@ $border: 1px solid white;
   
   .eventcard-userInput-label {
     width: 100%;
-    font-size: 0.7rem;
+    font-size: $breakpoint-font-small-wide;
     text-align: left;
     border-top: 1px solid gray;
     padding-left: 10px;
@@ -191,7 +225,7 @@ $border: 1px solid white;
   
   .eventcard-icon-container {
     height: 95%;
-    width: 50px;
+    width: auto;
   }
   
   .eventcard-icon-image {
@@ -199,21 +233,23 @@ $border: 1px solid white;
     max-width: 100%;
   }
   
-  .eventcard-icon-image:hover,
-  .eventcard-icon-image:focus {
-    background-color: red;
-    border-radius: 25%;
-  }
+  // .eventcard-icon-image-container:hover {
+  //   background-color: $hover-color;
+  //   border-radius: 25%;
+  // }
   
   .eventcard-icon-image-selected {
     background-color: red;
-    border-radius: 25%;
+    border-radius: 15%;
+    height: 80%;
+    max-width: 100%;
   }
   
   .eventcard-icon-label {
-    font-size: 1rem;
+    font-size: $breakpoint-font-medium-wide;
     position: relative;
     bottom: 5px;
+    text-align: center;
   }
   
   .eventcard-userInput-button-container {
@@ -222,4 +258,151 @@ $border: 1px solid white;
     justify-content: space-around;
     align-items: center;
   }
+
+  /* ---------- Media Quieries ----------*/
+
+  @media (max-width: $breakpoint-width-wide) {
+    .eventcard-main {
+      height: 400px;
+    }
+
+    .eventcard-image {
+      max-height: 325px;
+    }
+
+    .eventcard-data-container {
+      font-size: $breakpoint-font-medium-mid;
+    }
+
+    .eventcard-button {
+      width: 70px;
+    }
+
+    .eventcard-userInput-label {
+      font-size: $breakpoint-font-small-mid;
+    }
+  }
+
+  @media (max-width: $breakpoint-width-mid) {
+    .eventcard-main {
+      height: 400px;
+    }
+
+    .eventcard-image {
+      max-height: 325px;
+    }
+
+    .eventcard-data-container {
+      font-size: $breakpoint-font-medium-mid;
+    }
+
+    .eventcard-button {
+      width: 50px;
+    }
+
+    .eventcard-userInput-label {
+      font-size: $breakpoint-font-small-mid;
+    }
+  }
+
+  @media (max-width: $breakpoint-width-narrow) {
+    .eventcard-main {
+      height: 400px;
+    }
+
+    .eventcard-image-container {
+      grid-template-rows: 40px auto 70px;
+    }
+
+    .eventcard-image {
+      max-height: 325px;
+    }
+
+    .eventcard-image-button-container {
+      .eventcard-button {
+        height: 20px;
+        font-size: $breakpoint-font-large-narrow;
+      }
+    }
+
+    .eventcard-data-container {
+      font-size: $breakpoint-font-medium-narrow;
+    }
+
+    .eventcard-source-info-container {
+      width: 70%;
+    }
+
+    .eventcard-source-right-container {
+      width: 30%;
+      .eventcard-button {
+        height: 40px;
+      }
+    }
+
+    .eventcard-button {
+      width: 50px;
+      height: 20px;
+      font-size: $breakpoint-font-small-narrow;
+    }
+
+    .eventcard-userInput-label {
+      font-size: $breakpoint-font-small-narrow;
+    }
+
+    .eventcard-icon-label {
+      font-size: $breakpoint-font-medium-narrow
+    }
+  }
   
+  @media (max-width: $breakpoint-width-tiny) {
+
+    .eventcard-image-container {
+      grid-template-rows: 40px auto 70px;
+    }
+
+    .eventcard-image {
+      max-height: 325px;
+    }
+
+    .eventcard-image-button-container {
+      .eventcard-button {
+        height: 20px;
+        font-size: $breakpoint-font-large-narrow;
+      }
+    }
+
+    .eventcard-data-container {
+      font-size: $breakpoint-font-small-narrow;
+    }
+
+    .eventcard-source-info-container {
+      width: 65%;
+    }
+
+    .eventcard-source-right-container {
+      width: 35%;
+      .eventcard-button {
+        margin: 5px;
+        height: 40px;
+      }
+      .eventcard-eventData, .eventcard-label {
+        font-size: $breakpoint-font-medium-narrow;
+      }
+    }
+
+    .eventcard-button {
+      width: 50px;
+      height: 20px;
+      font-size: $breakpoint-font-small-narrow;
+    }
+
+    .eventcard-userInput-label {
+      font-size: $breakpoint-font-small-narrow;
+    }
+
+    .eventcard-icon-label {
+      font-size: $breakpoint-font-medium-narrow
+    }
+  
+  }

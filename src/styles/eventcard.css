@@ -3,6 +3,7 @@
   height: calc(100% - 50px);
   width: 100%;
   min-height: 650px;
+  min-width: 400px;
   background-color: black;
   padding: 0px 20px 0px 20px;
   /* For Children */
@@ -22,25 +23,36 @@
 .eventcard-arrows {
   height: 25px;
   width: 25px;
-  margin: 0;
+  margin: 10px;
 }
 
 .eventcard-main {
   height: 80%;
-  width: 100vw;
+  width: 90vw;
   max-width: 1200px;
-  min-height: 550px;
+  min-width: 400px;
+  height: 550px;
   background-color: #1e1e1e;
-  -webkit-box-shadow: 0px 0px 30px 5px #3a3a3a;
-          box-shadow: 0px 0px 30px 5px #3a3a3a;
+  -webkit-box-shadow: 0px 0px 30px 5px #4b4b4b;
+          box-shadow: 0px 0px 30px 5px #4b4b4b;
   border: 1px solid white;
   border-radius: 1%;
-  margin: 30px;
+  margin: 20px;
   color: white;
   /* For Children */
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.ec-flash-event {
+  -webkit-box-shadow: 0px 0px 30px 15px red;
+          box-shadow: 0px 0px 30px 15px red;
+}
+
+.ec-flash-cycle {
+  -webkit-box-shadow: 0px 0px 30px 15px #828282;
+          box-shadow: 0px 0px 30px 15px #828282;
 }
 
 .eventcard-image-container {
@@ -52,6 +64,9 @@
   display: grid;
   -ms-grid-rows: 40px auto 25px;
       grid-template-rows: 40px auto 25px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .eventcard-image-timestamp-container {
@@ -60,13 +75,13 @@
 }
 
 .eventcard-image-timestamp-container .eventcard-image-timestamp {
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin: 10px;
 }
 
 .eventcard-image {
   border: 1px solid white;
-  margin: 0px;
+  margin: 0 auto;
   max-height: 100%;
   max-width: 100%;
 }
@@ -94,7 +109,7 @@
   /* For Children */
   color: white;
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1rem;
   text-shadow: 1px 1px 5px black;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -152,6 +167,9 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .eventcard-eventId-container {
@@ -211,6 +229,7 @@
   width: 90px;
   /* margin: 0 auto; */
   font-size: 0.5em;
+  font-weight: 600;
 }
 
 .eventcard-userInput-selectIcon {
@@ -233,7 +252,7 @@
 
 .eventcard-userInput-label {
   width: 100%;
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   text-align: left;
   border-top: 1px solid gray;
   padding-left: 10px;
@@ -241,7 +260,7 @@
 
 .eventcard-icon-container {
   height: 95%;
-  width: 50px;
+  width: auto;
 }
 
 .eventcard-icon-image {
@@ -249,21 +268,18 @@
   max-width: 100%;
 }
 
-.eventcard-icon-image:hover,
-.eventcard-icon-image:focus {
-  background-color: red;
-  border-radius: 25%;
-}
-
 .eventcard-icon-image-selected {
   background-color: red;
-  border-radius: 25%;
+  border-radius: 15%;
+  height: 80%;
+  max-width: 100%;
 }
 
 .eventcard-icon-label {
   font-size: 1rem;
   position: relative;
   bottom: 5px;
+  text-align: center;
 }
 
 .eventcard-userInput-button-container {
@@ -276,5 +292,123 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+/* ---------- Media Quieries ----------*/
+@media (max-width: 1200px) {
+  .eventcard-main {
+    height: 400px;
+  }
+  .eventcard-image {
+    max-height: 325px;
+  }
+  .eventcard-data-container {
+    font-size: 0.8rem;
+  }
+  .eventcard-button {
+    width: 70px;
+  }
+  .eventcard-userInput-label {
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 1000px) {
+  .eventcard-main {
+    height: 400px;
+  }
+  .eventcard-image {
+    max-height: 325px;
+  }
+  .eventcard-data-container {
+    font-size: 0.8rem;
+  }
+  .eventcard-button {
+    width: 50px;
+  }
+  .eventcard-userInput-label {
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .eventcard-main {
+    height: 400px;
+  }
+  .eventcard-image-container {
+    -ms-grid-rows: 40px auto 70px;
+        grid-template-rows: 40px auto 70px;
+  }
+  .eventcard-image {
+    max-height: 325px;
+  }
+  .eventcard-image-button-container .eventcard-button {
+    height: 20px;
+    font-size: 0.8rem;
+  }
+  .eventcard-data-container {
+    font-size: 0.7rem;
+  }
+  .eventcard-source-info-container {
+    width: 70%;
+  }
+  .eventcard-source-right-container {
+    width: 30%;
+  }
+  .eventcard-source-right-container .eventcard-button {
+    height: 40px;
+  }
+  .eventcard-button {
+    width: 50px;
+    height: 20px;
+    font-size: 0.5em;
+  }
+  .eventcard-userInput-label {
+    font-size: 0.5em;
+  }
+  .eventcard-icon-label {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .eventcard-image-container {
+    -ms-grid-rows: 40px auto 70px;
+        grid-template-rows: 40px auto 70px;
+  }
+  .eventcard-image {
+    max-height: 325px;
+  }
+  .eventcard-image-button-container .eventcard-button {
+    height: 20px;
+    font-size: 0.8rem;
+  }
+  .eventcard-data-container {
+    font-size: 0.5em;
+  }
+  .eventcard-source-info-container {
+    width: 65%;
+  }
+  .eventcard-source-right-container {
+    width: 35%;
+  }
+  .eventcard-source-right-container .eventcard-button {
+    margin: 5px;
+    height: 40px;
+  }
+  .eventcard-source-right-container .eventcard-eventData, .eventcard-source-right-container .eventcard-label {
+    font-size: 0.7rem;
+  }
+  .eventcard-button {
+    width: 50px;
+    height: 20px;
+    font-size: 0.5em;
+  }
+  .eventcard-userInput-label {
+    font-size: 0.5em;
+  }
+  .eventcard-icon-label {
+    font-size: 0.7rem;
+  }
 }
 /*# sourceMappingURL=eventcard.css.map */

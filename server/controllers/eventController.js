@@ -1,10 +1,17 @@
+
 const axios = require('axios').default;
+
+//import openSocket from 'socket.io-client';
+const openSocket = require('socket.io-client');
+const socket = openSocket('http://localhost:8000');
+
+
 
 module.exports = {
     createEvent: async (req, res) => {
         console.log("Create Event Called");
-        let timestamp = Date.now();
-        let date_time = new Date(timestamp);
+        let timestamp = ( new Date() ).toLocaleString();
+        let epoch_time = Date.now();
         const db = req.app.get('db');
         let { source_id,
             event_cameraid,  
@@ -14,12 +21,12 @@ module.exports = {
             src_notes 
         } = req.body;
         // Create Image Link:
-        const rec_img_url = `http://localhost:7011/ec2/cameraThumbnail?cameraId=${event_cameraid}&time=${timestamp}`
+        const rec_img_url = `http://localhost:7011/ec2/cameraThumbnail?cameraId=${event_cameraid}&time=${epoch_time}`
         const rec_img_data = '';
         const live_img_url = `http://localhost:7011/ec2/cameraThumbnail?cameraId=${event_cameraid}`
         // Create Video Links:
-        const startVidTimestamp = timestamp - 5000; //Starts Video 5sec before event
-        const endVidTimestamp = timestamp + 15000; //Starts Video 15sec after event
+        const startVidTimestamp = epoch_time - 5000; //Starts Video 5sec before event
+        const endVidTimestamp = epoch_time + 15000; //Starts Video 15sec after event
         const vid_live_webm = `http://localhost:7011/media/${event_cameraid}.webm`;
         const vid_live_mpjpeg = `http://localhost:7011/media/${event_cameraid}.mpjpeg`;
         const vid_rec_webm = `http://localhost:7011/media/${event_cameraid}.webm?pos=${startVidTimestamp}&endPos=${endVidTimestamp}`;
@@ -29,7 +36,7 @@ module.exports = {
             source_id,
             event_cameraid, 
             timestamp,
-            date_time, 
+            epoch_time, 
             status, 
             analytics_type, 
             src_class,
@@ -43,8 +50,11 @@ module.exports = {
             vid_rec_mpjpeg
         ] );
         console.log(`New Event from source_id ${source_id} @ ${timestamp}`);
-        console.log("Event Info: ", newEvent);
         res.status(200).send("Event Created");
+        //Trigger Socket IO to notify Client
+        socket.emit('newEvent', () => {
+            console.log('Notifing SocketIO Server of New Event');
+        })
     },
 
     getAllEvents: async (req, res) => {
@@ -53,10 +63,11 @@ module.exports = {
         await db.get_all_events()
             .then( events => {
                 res.status(200).send( events )
+                //console.log( events );
             } )
             .catch( error => {
                 res.status(500).send( { errorMessage: "Error Getting Posts" } );
-               //console.log( error );
+                //console.log( error );
             } );
     },
 
@@ -74,8 +85,7 @@ module.exports = {
 
     updateEvent: async (req, res) => {
         console.log("Update Event Called");
-        const jsTime = new Date();
-        const timestamp = jsTime.toLocaleString();
+        const timestamp = ( new Date() ).toLocaleString();
         const status = 'Updated';
         const db = req.app.get('db');
         console.log("req.body",req.body);

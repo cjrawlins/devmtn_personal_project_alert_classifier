@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { logout_user } from '../redux/actions/userActions'
@@ -9,6 +9,9 @@ import { withRouter } from 'react-router-dom';
 function Nav(props) {
 
     const dispatch = useDispatch();
+    
+    const [toggleFilterMenu, setToggleFilterMenu] = useState(false);
+
 
     const handleLogout = () => {
         console.log("Logout Called");
@@ -22,10 +25,24 @@ function Nav(props) {
             } )
     }
 
+    const handleFilter = (filterName) => {
+        switch (filterName) {
+            case 'New':
+                
+        }
+    }
+
     return(
         <div className="Nav">
             <div className="nav-left-container">
-                <button className="nav-filter-menu-button">Filter</button>
+                <button className="nav-filter-menu-button" 
+                    onClick={ () => setToggleFilterMenu(!toggleFilterMenu) }
+                >Filter</button>
+                { toggleFilterMenu ? <div className="nav-filter-menu">
+                    <p className="nav-filter-items">All</p>
+                    <p className="nav-filter-items">New</p>
+                    <p className="nav-filter-items">Updated</p>
+                </div> : null }
             </div>
             <div className="nav-right-container">
                 { props.history.location.pathname === '/events' ?

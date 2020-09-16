@@ -12,6 +12,7 @@ export const logout_user = () =>  {
 };
 
 export const get_user = (user) => {
+    console.log(user);
     return {
         type: 'GET_USER',
         payload: user
